@@ -6,6 +6,7 @@ import com.pnonyusa.exception.ErrorMessages;
 import com.pnonyusa.repositories.ProductRepository;
 import com.pnonyusa.services.ProductService;
 
+import com.pnonyusa.shared.dto.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -50,6 +51,9 @@ public class ProductServiceImpl implements ProductService {
     public Product createProduct(Product product) {
 
         if(product==null)throw new NullPointerException(ErrorMessages.OBJECT_IS_NULL.getErrorMessages());
+
+        product.setProductId(new Utils().generateId(6));
+
         return productRepository.save(product);
     }
 
